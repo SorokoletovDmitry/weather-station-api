@@ -1,0 +1,377 @@
+{
+  "info": {
+    "name": "Weather Station API",
+    "description": "Postman коллекция для API сбора и хранения данных с метеостанций",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "locationId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "stationId", 
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "sensorTypeId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "🏠 Root Endpoint",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/",
+          "host": ["{{baseUrl}}"],
+          "path": [""]
+        }
+      }
+    },
+    {
+      "name": "📍 Locations",
+      "item": [
+        {
+          "name": "Get All Locations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/locations/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "locations", ""]
+            }
+          }
+        },
+        {
+          "name": "Create Location",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Москва, Красная площадь\",\n  \"latitude\": 55.7539,\n  \"longitude\": 37.6208,\n  \"altitude\": 130.0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/locations/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "locations", ""]
+            },
+            "description": "Создание нового местоположения метеостанции"
+          }
+        },
+        {
+          "name": "Get Location by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/locations/{{locationId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "locations", "{{locationId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🏭 Weather Stations",
+      "item": [
+        {
+          "name": "Get All Stations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/stations/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stations", ""]
+            }
+          }
+        },
+        {
+          "name": "Create Station",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Главная городская станция\",\n  \"model\": \"WS-5000\",\n  \"location_id\": 1,\n  \"status\": \"active\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/stations/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stations", ""]
+            },
+            "description": "Создание новой метеостанции. Требует предварительного создания location"
+          }
+        },
+        {
+          "name": "Get Station by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/stations/{{stationId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stations", "{{stationId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "📊 Sensor Types",
+      "item": [
+        {
+          "name": "Get All Sensor Types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/sensor-types/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "sensor-types", ""]
+            }
+          }
+        },
+        {
+          "name": "Create Sensor Type",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Температура\",\n  \"unit\": \"°C\",\n  \"description\": \"Датчик температуры воздуха\",\n  \"station_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/sensor-types/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "sensor-types", ""]
+            },
+            "description": "Создание типа датчика. Требует предварительного создания станции"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📈 Weather Data",
+      "item": [
+        {
+          "name": "Get All Weather Data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/weather-data/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "weather-data", ""]
+            }
+          }
+        },
+        {
+          "name": "Create Weather Data",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": 23.5,\n  \"location_id\": 1,\n  \"station_id\": 1,\n  \"sensor_type_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/weather-data/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "weather-data", ""]
+            },
+            "description": "Добавление данных измерений. Требует предварительного создания location, station и sensor type"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔔 Alerts",
+      "item": [
+        {
+          "name": "Get All Alerts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/alerts/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "alerts", ""]
+            }
+          }
+        },
+        {
+          "name": "Create Alert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Высокая температура\",\n  \"condition\": \"value > 30\",\n  \"severity\": \"high\",\n  \"is_active\": true,\n  \"sensor_type_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/alerts/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "alerts", ""]
+            },
+            "description": "Создание предупреждения. Требует предварительного создания sensor type"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔄 Complete Workflow Example",
+      "item": [
+        {
+          "name": "1. Create Location",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Тестовое местоположение\",\n  \"latitude\": 55.7558,\n  \"longitude\": 37.6173,\n  \"altitude\": 156.0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/locations/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "locations", ""]
+            },
+            "description": "Первый шаг: создаем местоположение"
+          }
+        },
+        {
+          "name": "2. Create Station",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Тестовая станция\",\n  \"model\": \"WS-2000\",\n  \"location_id\": 1,\n  \"status\": \"active\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/stations/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stations", ""]
+            },
+            "description": "Второй шаг: создаем метеостанцию"
+          }
+        },
+        {
+          "name": "3. Create Sensor Type",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Влажность\",\n  \"unit\": \"%\",\n  \"description\": \"Датчик влажности воздуха\",\n  \"station_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/sensor-types/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "sensor-types", ""]
+            },
+            "description": "Третий шаг: создаем тип датчика"
+          }
+        },
+        {
+          "name": "4. Create Weather Data",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": 65.5,\n  \"location_id\": 1,\n  \"station_id\": 1,\n  \"sensor_type_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/weather-data/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "weather-data", ""]
+            },
+            "description": "Четвертый шаг: добавляем данные измерений"
+          }
+        },
+        {
+          "name": "5. Create Alert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Высокая влажность\",\n  \"condition\": \"value > 80\",\n  \"severity\": \"medium\",\n  \"is_active\": true,\n  \"sensor_type_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/alerts/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "alerts", ""]
+            },
+            "description": "Пятый шаг: создаем предупреждение"
+          }
+        }
+      ]
+    }
+  ]
+}
