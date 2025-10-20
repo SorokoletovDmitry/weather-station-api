@@ -1,0 +1,37 @@
+# Virtual Environment
+venv/
+env/
+__pycache__/
+
+# Environment variables
+.env
+.env.local
+
+# Database
+*.db
+*.sqlite3
+weather.db
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Distribution / packaging
+dist/
+build/
