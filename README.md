@@ -68,7 +68,7 @@ Uvicorn - ASGI сервер
 
 💡 Примеры использования
 Создание местоположения:
-json
+```json
 POST /api/locations/
 {
   "name": "Москва, Красная площадь",
@@ -76,8 +76,9 @@ POST /api/locations/
   "longitude": 37.6208,
   "altitude": 130
 }
+```
 Создание метеостанции:
-json
+```json
 POST /api/stations/
 {
   "name": "Главная городская станция", 
@@ -85,6 +86,7 @@ POST /api/stations/
   "location_id": 1,
   "status": "active"
 }
+```
 🎯 Особенности проекта
 ✅ Автоматическая документация - Swagger/OpenAPI
 ✅ Валидация данных - строгая типизация через Pydantic
