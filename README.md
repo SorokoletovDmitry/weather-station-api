@@ -8,7 +8,7 @@ RESTful API для сбора и анализа данных с метеорол
 
 1. **Клонируйте репозиторий**
 ```bash
-git clone <repository-url>
+git clone weather-station-api
 cd weather_station
 ```
 2. **Установите зависимости**
